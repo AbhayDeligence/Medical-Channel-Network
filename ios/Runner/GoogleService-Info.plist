@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>226791562502-145e5gc1oculjhi525g22cqtvdec9nt8.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.226791562502-145e5gc1oculjhi525g22cqtvdec9nt8</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>226791562502-c967mr3630a7id567luu811q5i6g2lbb.apps.googleusercontent.com</string>
+	<key>API_KEY</key>
+	<string>AIzaSyBuyOEzhodSksjlRUJA5k6Oe0e9yJJ7Xvw</string>
+	<key>GCM_SENDER_ID</key>
+	<string>226791562502</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.lindgrenmedia.mcn</string>
+	<key>PROJECT_ID</key>
+	<string>medical-channel-network</string>
+	<key>STORAGE_BUCKET</key>
+	<string>medical-channel-network.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:226791562502:ios:3f463891ad7fb30126d287</string>
+</dict>
+</plist>

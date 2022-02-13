@@ -1,0 +1,62 @@
+{
+  "project_info": {
+    "project_number": "226791562502",
+    "project_id": "medical-channel-network",
+    "storage_bucket": "medical-channel-network.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:226791562502:android:2316f3ea80778d3f26d287",
+        "android_client_info": {
+          "package_name": "com.lindgrenmedia.mcn"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "226791562502-c967mr3630a7id567luu811q5i6g2lbb.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.lindgrenmedia.mcn",
+            "certificate_hash": "17a9398b515fdceb6e011ccc09b5e3f7b46b33ab"
+          }
+        },
+        {
+          "client_id": "226791562502-hgjqoatqhte79rci2tirribtkgqqtolo.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.lindgrenmedia.mcn",
+            "certificate_hash": "83727538f93d113ba35a579e566b093836638642"
+          }
+        },
+        {
+          "client_id": "226791562502-oqc3vcs9k0uvkrvtfrorsurtsqf70cgj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBYypLbELj6ZSONkNO6EE7InMxlJIl3wxE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "226791562502-oqc3vcs9k0uvkrvtfrorsurtsqf70cgj.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "226791562502-145e5gc1oculjhi525g22cqtvdec9nt8.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.lindgrenmedia.mcn"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
