@@ -9,10 +9,9 @@ import 'package:news_app/utils/snacbar.dart';
 import 'package:provider/provider.dart';
 import 'package:easy_localization/easy_localization.dart';
 
-
-
 class SearchPage extends StatefulWidget {
-  SearchPage({Key? key}) : super(key: key);
+  final String? tag;
+  SearchPage({Key? key, this.tag}) : super(key: key);
 
   _SearchPageState createState() => _SearchPageState();
 }
@@ -23,13 +22,12 @@ class _SearchPageState extends State<SearchPage> {
   @override
   void initState() {
     Future.delayed(Duration(milliseconds: 0))
-    .then((value) => context.read<SearchBloc>().saerchInitialize());
+        .then((value) => context.read<SearchBloc>().saerchInitialize());
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       appBar: AppBar(
         title: _searchBar(),
@@ -39,8 +37,6 @@ class _SearchPageState extends State<SearchPage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            // suggestion text
-
             Padding(
               padding: const EdgeInsets.only(
                   top: 10, left: 15, bottom: 5, right: 15),
@@ -49,14 +45,14 @@ class _SearchPageState extends State<SearchPage> {
                     ? 'recent searchs'
                     : 'we have found',
                 textAlign: TextAlign.left,
-                style: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.w700),
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.w700),
               ).tr(),
             ),
             context.watch<SearchBloc>().searchStarted == false
                 ? SuggestionsUI()
-                : AfterSearchUI()
+                : AfterSearchUI(
+                    tag: widget.tag,
+                  )
           ],
         ),
       ),
@@ -70,11 +66,10 @@ class _SearchPageState extends State<SearchPage> {
       child: TextFormField(
         autofocus: true,
         controller: context.watch<SearchBloc>().textfieldCtrl,
-        style: TextStyle(
-            fontSize: 16, fontWeight: FontWeight.w500),
+        style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
         decoration: InputDecoration(
           border: InputBorder.none,
-          hintText: "search news".tr(),
+          hintText: "Search".tr(),
           hintStyle: TextStyle(
               fontSize: 16,
               fontWeight: FontWeight.w500,
@@ -114,7 +109,7 @@ class SuggestionsUI extends StatelessWidget {
       child: sb.recentSearchData.isEmpty
           ? EmptyPage(
               icon: Feather.search,
-              message: 'search news'.tr(),
+              message: 'Search',
               message1: "search-description".tr(),
             )
           : ListView.separated(
@@ -159,13 +154,14 @@ class SuggestionsUI extends StatelessWidget {
 }
 
 class AfterSearchUI extends StatelessWidget {
-  const AfterSearchUI({Key? key}) : super(key: key);
+  final String? tag;
+  const AfterSearchUI({Key? key, this.tag}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Expanded(
       child: FutureBuilder(
-        future: context.watch<SearchBloc>().getData(),
+        future: context.watch<SearchBloc>().getData(tag),
         builder: (BuildContext context, AsyncSnapshot snapshot) {
           if (snapshot.hasData) {
             if (snapshot.data.length == 0)

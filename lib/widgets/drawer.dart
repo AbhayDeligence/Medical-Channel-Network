@@ -5,11 +5,11 @@ import 'package:news_app/blocs/theme_bloc.dart';
 import 'package:news_app/config/config.dart';
 import 'package:news_app/models/custom_color.dart';
 import 'package:news_app/pages/bookmarks.dart';
+import 'package:news_app/pages/comments&suggestions.dart';
 import 'package:news_app/pages/profile.dart';
 import 'package:news_app/services/app_service.dart';
 import 'package:news_app/utils/app_name.dart';
 import 'package:news_app/utils/next_screen.dart';
-import 'package:news_app/widgets/language.dart';
 import 'package:provider/provider.dart';
 import 'package:easy_localization/easy_localization.dart';
 
@@ -22,7 +22,6 @@ class DrawerMenu extends StatelessWidget {
     final List titles = [
       'Profile',
       'Favorites',
-      'language',
       'about us',
       'privacy policy',
       'contact us'
@@ -31,7 +30,6 @@ class DrawerMenu extends StatelessWidget {
     final List icons = [
       Feather.user,
       Feather.bookmark,
-      Feather.globe,
       Feather.info,
       Feather.lock,
       Feather.mail
@@ -54,7 +52,7 @@ class DrawerMenu extends StatelessWidget {
                     Text(
                       'Version: ${sb.appVersion}',
                       style: TextStyle(fontSize: 13, color: Colors.grey[600]),
-                    )
+                    ),
                   ],
                 ),
               ),
@@ -94,15 +92,15 @@ class DrawerMenu extends StatelessWidget {
                       } else if (index == 1) {
                         nextScreen(context, BookmarkPage());
                       } else if (index == 2) {
-                        nextScreenPopup(context, LanguagePopup());
-                      } else if (index == 3) {
                         AppService().openLinkWithCustomTab(
                             context, Config().ourWebsiteUrl);
-                      } else if (index == 4) {
+                      } else if (index == 2) {
                         AppService().openLinkWithCustomTab(
                             context, Config().privacyPolicyUrl);
-                      } else if (index == 5) {
-                        AppService().openEmailSupport();
+                      } else if (index == 4) {
+                        // send email
+                        nextScreen(context, CommentSugestion());
+                        //AppService().openEmailSupport();
                       }
                     },
                   );

@@ -6,7 +6,6 @@ import 'package:news_app/pages/explore.dart';
 import 'package:news_app/pages/profile.dart';
 import 'package:news_app/pages/videos.dart';
 import 'package:provider/provider.dart';
-import 'package:easy_localization/easy_localization.dart';
 
 import 'events.dart';
 
@@ -40,7 +39,6 @@ class _HomePageState extends State<HomePage> {
   void initState() {
     super.initState();
     Future.delayed(Duration(milliseconds: 0)).then((value) async {
-      //final adb = context.read<AdsBloc>();
       await context
           .read<NotificationBloc>()
           .initFirebasePushNotification(context)
@@ -85,7 +83,7 @@ class _HomePageState extends State<HomePage> {
           children: <Widget>[
             Explore(),
             VideoArticles(),
-            Events(),
+            Engage(),
             StorePage(),
           ],
         ),
@@ -108,19 +106,19 @@ class _HomePageState extends State<HomePage> {
               AssetImage('assets/images/1.png'),
               size: 25,
             ),
-            label: 'home'.tr()),
-        BottomNavigationBarItem(
-            icon: ImageIcon(
-              AssetImage('assets/images/4.png'),
-              size: 25,
-            ),
-            label: 'Lectures'),
+            label: 'Home'),
         BottomNavigationBarItem(
             icon: ImageIcon(
               AssetImage('assets/images/2.png'),
               size: 25,
             ),
-            label: 'Events'),
+            label: 'Lectures'),
+        BottomNavigationBarItem(
+            icon: ImageIcon(
+              AssetImage('assets/images/4.png'),
+              size: 25,
+            ),
+            label: 'Engage'),
         BottomNavigationBarItem(
             icon: ImageIcon(
               AssetImage('assets/images/3.png'),

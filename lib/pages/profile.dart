@@ -13,7 +13,6 @@ import '../blocs/sign_in_bloc.dart';
 import '../config/config.dart';
 import '../utils/next_screen.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:news_app/utils/empty.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({Key? key}) : super(key: key);
@@ -328,7 +327,12 @@ class UserUI extends StatelessWidget {
               size: 20,
             ),
             onTap: () => nextScreen(
-                context, EditProfile(name: sb.name, imageUrl: sb.imageUrl))),
+                context,
+                EditProfile(
+                  name: sb.name,
+                  imageUrl: sb.imageUrl,
+                  head: sb.headline,
+                ))),
         Divider(
           height: 3,
         ),
@@ -413,13 +417,52 @@ class _StorePageState extends State<StorePage> {
         ],
       ),
       body: RefreshIndicator(
-        child: ListView(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            SizedBox(
-              height: MediaQuery.of(context).size.height * 0.35,
+            Expanded(
+              child: Image(
+                width: MediaQuery.of(context).size.width,
+                image: AssetImage('assets/images/Storepagegraphic.png'),
+                fit: BoxFit.fitWidth,
+              ),
             ),
-            EmptyPage(
-                icon: Feather.clipboard, message: 'Comming Soon', message1: ''),
+            // SizedBox(
+            //   height: 10,
+            // ),
+            // Text(
+            //   'Store',
+            //   style: TextStyle(fontWeight: FontWeight.w800, fontSize: 25),
+            // ),
+            // SizedBox(
+            //   height: 20,
+            // ),
+            // Container(
+            //   width: MediaQuery.of(context).size.width / 2,
+            //   child: Text(
+            //     'A location to find learmning for CEUs events, and material resources specific to the healthcare profession',
+            //     textAlign: TextAlign.center,
+            //   ),
+            // ),
+            // SizedBox(
+            //   height: 40,
+            // ),
+            // Row(
+            //   mainAxisAlignment: MainAxisAlignment.center,
+            //   children: [
+            //     AppName(fontSize: 20),
+            //     RichText(
+            //       text: TextSpan(
+            //         text: ' Network',
+            //         style: TextStyle(
+            //             fontSize: 20,
+            //             fontFamily: 'Archivo',
+            //             fontWeight: FontWeight.w900,
+            //             color: Colors.blue[800]),
+            //       ),
+            //     )
+            //   ],
+            // )
           ],
         ),
         onRefresh: () async {

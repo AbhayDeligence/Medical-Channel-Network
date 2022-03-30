@@ -34,18 +34,18 @@ class ArticleDetails extends StatefulWidget {
 }
 
 class _ArticleDetailsState extends State<ArticleDetails> {
-
-
   double rightPaddingValue = 140;
 
   void _handleShare() {
     final sb = context.read<SignInBloc>();
-    final String _shareTextAndroid = '${widget.data!.title}, Check out this app to explore more. App link: https://play.google.com/store/apps/details?id=${sb.packageName}';
-    final String _shareTextiOS = '${widget.data!.title}, Check out this app to explore more. App link: https://play.google.com/store/apps/details?id=${sb.packageName}';
+    final String _shareTextAndroid =
+        '${widget.data!.title}, Check out this app to explore more. App link: https://play.google.com/store/apps/details?id=${sb.packageName}';
+    final String _shareTextiOS =
+        '${widget.data!.title}, Check out this app to explore more. App link: https://play.google.com/store/apps/details?id=${sb.packageName}';
 
     if (Platform.isAndroid) {
       Share.share(_shareTextAndroid);
-    } else{
+    } else {
       Share.share(_shareTextiOS);
     }
   }
@@ -85,7 +85,6 @@ class _ArticleDetailsState extends State<ArticleDetails> {
     super.dispose();
   }
 
-
   @override
   Widget build(BuildContext context) {
     final sb = context.watch<SignInBloc>();
@@ -115,15 +114,22 @@ class _ArticleDetailsState extends State<ArticleDetails> {
                                 Row(
                                   children: <Widget>[
                                     Container(
+                                        // kkbk0005296
+                                        //6245907357
                                         alignment: Alignment.center,
                                         decoration: BoxDecoration(
-                                          borderRadius: BorderRadius.circular(5),
-                                          color: context.watch<ThemeBloc>().darkTheme == false
+                                          borderRadius:
+                                              BorderRadius.circular(5),
+                                          color: context
+                                                      .watch<ThemeBloc>()
+                                                      .darkTheme ==
+                                                  false
                                               ? CustomColor().loadingColorLight
                                               : CustomColor().loadingColorDark,
                                         ),
                                         child: AnimatedPadding(
-                                          duration: Duration(milliseconds: 1000),
+                                          duration:
+                                              Duration(milliseconds: 1000),
                                           padding: EdgeInsets.only(
                                               left: 10,
                                               right: rightPaddingValue,
@@ -168,8 +174,9 @@ class _ArticleDetailsState extends State<ArticleDetails> {
                                     Text(
                                       article.date!,
                                       style: TextStyle(
-                                        color: Theme.of(context).secondaryHeaderColor,
-                                        fontSize: 12),
+                                          color: Theme.of(context)
+                                              .secondaryHeaderColor,
+                                          fontSize: 12),
                                     ),
                                   ],
                                 ),
@@ -179,11 +186,10 @@ class _ArticleDetailsState extends State<ArticleDetails> {
                                 Text(
                                   article.title!,
                                   style: TextStyle(
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.bold,
-                                    letterSpacing: -0.6,
-                                    wordSpacing: 1
-                                  ),
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.bold,
+                                      letterSpacing: -0.6,
+                                      wordSpacing: 1),
                                 ),
                                 Divider(
                                   color: Theme.of(context).primaryColor,
@@ -191,39 +197,57 @@ class _ArticleDetailsState extends State<ArticleDetails> {
                                   thickness: 2,
                                   height: 20,
                                 ),
-
                                 TextButton.icon(
-                                      style: ButtonStyle(
-                                        padding: MaterialStateProperty.resolveWith((states) => EdgeInsets.only(left: 10, right: 10)),
-                                        backgroundColor: MaterialStateProperty.resolveWith((states) => Theme.of(context).primaryColor),
-                                        shape:MaterialStateProperty.resolveWith((states) => RoundedRectangleBorder(borderRadius:BorderRadius.circular(3))),
-                                      ),
-                                      icon: Icon(Feather.message_circle,color: Colors.white, size: 20),
-                                      label: Text('comments',style: TextStyle(color: Colors.white)).tr(),
-                                      onPressed: () {
-                                        nextScreen(context,CommentsPage(timestamp: article.timestamp));
-                                      },
+                                  style: ButtonStyle(
+                                    padding: MaterialStateProperty.resolveWith(
+                                        (states) => EdgeInsets.only(
+                                            left: 10, right: 10)),
+                                    backgroundColor:
+                                        MaterialStateProperty.resolveWith(
+                                            (states) =>
+                                                Theme.of(context).primaryColor),
+                                    shape: MaterialStateProperty.resolveWith(
+                                        (states) => RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(3))),
+                                  ),
+                                  icon: Icon(Feather.message_circle,
+                                      color: Colors.white, size: 20),
+                                  label: Text('comments',
+                                          style: TextStyle(color: Colors.white))
+                                      .tr(),
+                                  onPressed: () {
+                                    nextScreen(
+                                        context,
+                                        CommentsPage(
+                                            timestamp: article.timestamp));
+                                  },
                                 ),
-
-                                SizedBox(height: 10,),
-
+                                SizedBox(
+                                  height: 10,
+                                ),
                                 Row(
                                   mainAxisAlignment: MainAxisAlignment.start,
                                   children: <Widget>[
-                                    
                                     //views feature
-                                    ViewsCount(article: article,),
-                                    SizedBox(width: 20,),
+                                    ViewsCount(
+                                      article: article,
+                                    ),
+                                    SizedBox(
+                                      width: 20,
+                                    ),
 
-                                    LoveCount(collectionName: 'contents',timestamp: article.timestamp),
-                                    
-                                    
+                                    LoveCount(
+                                        collectionName: 'contents',
+                                        timestamp: article.timestamp),
                                   ],
                                 ),
                                 SizedBox(
                                   height: 20,
                                 ),
-                                HtmlBodyWidget(htmlData: article.description!,),
+                                HtmlBodyWidget(
+                                  htmlData: article.description!,
+                                ),
                                 SizedBox(
                                   height: 20,
                                 ),
@@ -243,11 +267,9 @@ class _ArticleDetailsState extends State<ArticleDetails> {
                   ],
                 ),
               ),
-              
-              
 
               // -- Banner ads --
-              
+
               //context.watch<AdsBloc>().bannerAdEnabled == false ? Container()
               //: BannerAdAdmob()   //admob
               //: BannerAdFb()    //fb
@@ -256,34 +278,38 @@ class _ArticleDetailsState extends State<ArticleDetails> {
         ));
   }
 
-  
-
   SliverAppBar _customAppBar(Article article, BuildContext context) {
     return SliverAppBar(
       expandedHeight: 270,
       flexibleSpace: FlexibleSpaceBar(
           background: widget.tag == null
-              ? CustomCacheImage(imageUrl: article.thumbnailImagelUrl, radius: 0.0)
+              ? CustomCacheImage(
+                  imageUrl:
+                      "https://img.youtube.com/vi/${article.videoID}/0.jpg",
+                  radius: 0.0)
               : Hero(
                   tag: widget.tag!,
-                  child: CustomCacheImage(imageUrl: article.thumbnailImagelUrl, radius: 0.0),
+                  child: CustomCacheImage(
+                      imageUrl:
+                          "https://img.youtube.com/vi/${article.videoID}/0.jpg",
+                      radius: 0.0),
                 )),
       leading: IconButton(
-        icon: const Icon(Icons.keyboard_backspace, size: 22, color: Colors.white),
+        icon:
+            const Icon(Icons.keyboard_backspace, size: 22, color: Colors.white),
         onPressed: () {
           Navigator.pop(context);
         },
       ),
       actions: <Widget>[
-
-
-        article.sourceUrl == null 
-        ? Container()
-        : IconButton(
-          icon: const Icon(Feather.external_link, size: 22, color: Colors.white),
-          onPressed: ()=> AppService().openLinkWithCustomTab(context, article.sourceUrl!),
-        ), 
-
+        article.sourceUrl == null
+            ? Container()
+            : IconButton(
+                icon: const Icon(Feather.external_link,
+                    size: 22, color: Colors.white),
+                onPressed: () => AppService()
+                    .openLinkWithCustomTab(context, article.sourceUrl!),
+              ),
         IconButton(
           icon: const Icon(Icons.share, size: 22, color: Colors.white),
           onPressed: () {

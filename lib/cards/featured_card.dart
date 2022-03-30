@@ -35,7 +35,9 @@ class FeaturedCard extends StatelessWidget {
                   child: Hero(
                       tag: heroTag,
                       child: CustomCacheImage(
-                          imageUrl: d.thumbnailImagelUrl, radius: 5)),
+                          imageUrl:
+                              "https://img.youtube.com/vi/${d.videoID}/0.jpg",
+                          radius: 5)),
                 ),
                 VideoIcon(
                   contentType: d.contentType,

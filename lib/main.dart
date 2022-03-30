@@ -4,24 +4,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'app.dart';
 
-
-void main()async {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-    statusBarColor: Colors.transparent,
-    statusBarIconBrightness: Brightness.dark
+      statusBarColor: Colors.transparent,
+      statusBarIconBrightness: Brightness.dark));
+  runApp(EasyLocalization(
+    supportedLocales: [Locale('en')],
+    path: 'assets/translations',
+    fallbackLocale: Locale('en'),
+    startLocale: Locale('en'),
+    useOnlyLangCode: true,
+    child: MyApp(),
   ));
-  runApp(
-    EasyLocalization(
-      supportedLocales: [Locale('en')],
-      path: 'assets/translations',
-      fallbackLocale: Locale('en'),
-      startLocale: Locale('en'),
-      useOnlyLangCode: true,
-      child: MyApp(),
-    )
-  );
-  
 }
-

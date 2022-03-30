@@ -37,7 +37,7 @@ class Card2 extends StatelessWidget {
                   child: Hero(
                     tag: heroTag,
                     child: CustomCacheImage(
-                      imageUrl: d.thumbnailImagelUrl,
+                      imageUrl: "https://img.youtube.com/vi/${d.videoID}/0.jpg",
                       radius: 5.0,
                       circularShape: false,
                     ),

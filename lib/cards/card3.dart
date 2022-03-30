@@ -43,7 +43,9 @@ class Card3 extends StatelessWidget {
                               borderRadius: BorderRadius.circular(5.0),
                             ),
                             child: CustomCacheImage(
-                                imageUrl: d.thumbnailImagelUrl, radius: 5.0),
+                                imageUrl:
+                                    "https://img.youtube.com/vi/${d.videoID}/0.jpg",
+                                radius: 5.0),
                           ),
                           VideoIcon(
                             contentType: d.contentType,
@@ -63,7 +65,9 @@ class Card3 extends StatelessWidget {
                             child: Hero(
                               tag: heroTag!,
                               child: CustomCacheImage(
-                                  imageUrl: d.thumbnailImagelUrl, radius: 5.0),
+                                  imageUrl:
+                                      "https://img.youtube.com/vi/${d.videoID}/0.jpg",
+                                  radius: 5.0),
                             ),
                           ),
                           VideoIcon(

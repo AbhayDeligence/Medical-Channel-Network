@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
@@ -9,7 +10,9 @@ import 'package:news_app/models/custom_color.dart';
 import 'package:news_app/pages/comments.dart';
 import 'package:news_app/services/app_service.dart';
 import 'package:news_app/utils/cached_image.dart';
+import 'package:news_app/utils/dialog.dart';
 import 'package:news_app/utils/sign_in_dialog.dart';
+import 'package:news_app/utils/toast.dart';
 import 'package:news_app/widgets/bookmark_icon.dart';
 import 'package:news_app/widgets/html_body.dart';
 import 'package:news_app/widgets/love_count.dart';
@@ -82,15 +85,6 @@ class _VideoArticleDetailsState extends State<VideoArticleDetails> {
     }
   }
 
-  // _initInterstitialAds (){
-  //   final adb = context.read<AdsBloc>();
-  //   Future.delayed(Duration(milliseconds: 0)).then((value){
-  //     if(adb.interstitialAdEnabled == true){
-  //       context.read<AdsBloc>().loadAds();
-  //     }
-  //   });
-  // }
-
   @override
   void initState() {
     super.initState();
@@ -124,7 +118,9 @@ class _VideoArticleDetailsState extends State<VideoArticleDetails> {
       player: YoutubePlayer(
         controller: _controller,
         showVideoProgressIndicator: true,
-        thumbnail: CustomCacheImage(imageUrl: d.thumbnailImagelUrl, radius: 0),
+        thumbnail: CustomCacheImage(
+            imageUrl: "https://img.youtube.com/vi/${d.videoID}/0.jpg",
+            radius: 0),
       ),
       builder: (context, player) {
         return Scaffold(
@@ -260,29 +256,113 @@ class _VideoArticleDetailsState extends State<VideoArticleDetails> {
                               thickness: 2,
                               height: 20,
                             ),
-                            TextButton.icon(
-                              style: ButtonStyle(
-                                padding: MaterialStateProperty.resolveWith(
-                                    (states) =>
-                                        EdgeInsets.only(left: 10, right: 10)),
-                                backgroundColor:
-                                    MaterialStateProperty.resolveWith(
-                                        (states) =>
-                                            Theme.of(context).primaryColor),
-                                shape: MaterialStateProperty.resolveWith(
-                                    (states) => RoundedRectangleBorder(
-                                        borderRadius:
-                                            BorderRadius.circular(3))),
-                              ),
-                              icon: Icon(Feather.message_circle,
-                                  color: Colors.white, size: 20),
-                              label: Text('comments',
-                                      style: TextStyle(color: Colors.white))
-                                  .tr(),
-                              onPressed: () {
-                                nextScreen(context,
-                                    CommentsPage(timestamp: d.timestamp));
-                              },
+                            Row(
+                              children: [
+                                TextButton.icon(
+                                  style: ButtonStyle(
+                                    padding: MaterialStateProperty.resolveWith(
+                                        (states) => EdgeInsets.only(
+                                            left: 10, right: 10)),
+                                    backgroundColor:
+                                        MaterialStateProperty.resolveWith(
+                                            (states) =>
+                                                Theme.of(context).primaryColor),
+                                    shape: MaterialStateProperty.resolveWith(
+                                        (states) => RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(3))),
+                                  ),
+                                  icon: Icon(Feather.message_circle,
+                                      color: Colors.white, size: 20),
+                                  label: Text('comments',
+                                          style: TextStyle(color: Colors.white))
+                                      .tr(),
+                                  onPressed: () {
+                                    nextScreen(context,
+                                        CommentsPage(timestamp: d.timestamp));
+                                  },
+                                ),
+                                const SizedBox(
+                                  width: 10,
+                                ),
+                                TextButton.icon(
+                                  style: ButtonStyle(
+                                    padding: MaterialStateProperty.resolveWith(
+                                        (states) => EdgeInsets.only(
+                                            left: 10, right: 10)),
+                                    backgroundColor:
+                                        MaterialStateProperty.resolveWith(
+                                            (states) =>
+                                                Theme.of(context).primaryColor),
+                                    shape: MaterialStateProperty.resolveWith(
+                                        (states) => RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(3))),
+                                  ),
+                                  icon: Icon(Feather.share,
+                                      color: Colors.white, size: 20),
+                                  label: Text('Share',
+                                          style: TextStyle(color: Colors.white))
+                                      .tr(),
+                                  onPressed: () {
+                                    sb.uid != null
+                                        ? showDialog(
+                                            context: context,
+                                            builder: (BuildContext context) {
+                                              return AlertDialog(
+                                                title: Text(
+                                                    'Share this post to engage tab ?'),
+                                                actions: <Widget>[
+                                                  TextButton(
+                                                      onPressed: () {
+                                                        print(
+                                                            d.youtubeVideoUrl);
+                                                        var date = DateFormat(
+                                                                "dd-MM-yyyy")
+                                                            .format(
+                                                                DateTime.now());
+
+                                                        FirebaseFirestore
+                                                            .instance
+                                                            .collection(
+                                                                'engageTab')
+                                                            .doc()
+                                                            .set({
+                                                              'postImgUrl': '',
+                                                              'reported': [],
+                                                              'textContent':
+                                                                  d.title,
+                                                              'username':
+                                                                  sb.name,
+                                                              'userImage':
+                                                                  sb.imageUrl,
+                                                              'userUID': sb.uid,
+                                                              'datanow': date,
+                                                              'videoUrl': d
+                                                                  .youtubeVideoUrl,
+                                                              'likes': [],
+                                                            })
+                                                            .then((value) =>
+                                                                openToast(
+                                                                    context,
+                                                                    'Done !'))
+                                                            .then((value) =>
+                                                                Navigator.pop(
+                                                                    context));
+                                                      },
+                                                      child: Text('Yes')),
+                                                  TextButton(
+                                                      onPressed: () {
+                                                        Navigator.pop(context);
+                                                      },
+                                                      child: Text('No')),
+                                                ],
+                                              );
+                                            })
+                                        : openSignInDialog(context);
+                                  },
+                                ),
+                              ],
                             ),
                             SizedBox(
                               height: 10,

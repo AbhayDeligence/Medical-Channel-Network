@@ -35,7 +35,7 @@ class Card5 extends StatelessWidget {
                   child: Hero(
                     tag: heroTag,
                     child: CustomCacheImage(
-                      imageUrl: d.thumbnailImagelUrl,
+                      imageUrl: "https://img.youtube.com/vi/${d.videoID}/0.jpg",
                       radius: 5.0,
                       circularShape: false,
                     ),
@@ -99,7 +99,9 @@ class Card5 extends StatelessWidget {
           ],
         ),
       ),
-      onTap: () => navigateToDetailsScreen(context, d, heroTag),
+      onTap: () {
+        navigateToDetailsScreen(context, d, heroTag);
+      },
     );
   }
 }

@@ -12,32 +12,24 @@ class DonePage extends StatefulWidget {
 }
 
 class _DonePageState extends State<DonePage> {
-
-
   @override
   void initState() {
     Future.delayed(Duration(milliseconds: 2000))
-    .then((value) => nextScreenCloseOthers(context, IntroPage()));
+        .then((value) => nextScreenCloseOthers(context, IntroPage()));
     super.initState();
   }
 
-
-  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Theme.of(context).backgroundColor,
       body: Center(
-        child: Lottie.asset(
-          Config().doneAsset,
-          alignment: Alignment.center,
-          fit: BoxFit.cover,
-          height: 200,
-          width: 200,
-          repeat: false
-          
-          
-        ),
+        child: Lottie.asset(Config().doneAsset,
+            alignment: Alignment.center,
+            fit: BoxFit.fitWidth,
+            height: 400,
+            width: MediaQuery.of(context).size.width,
+            repeat: false),
       ),
     );
   }

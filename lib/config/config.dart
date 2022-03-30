@@ -6,7 +6,8 @@ class Config {
   final String supportEmail = 'jon@jonlindgren.com';
   final String privacyPolicyUrl =
       'https://docs.google.com/document/d/e/2PACX-1vQYeT5GfxOVlJEoObN4-6LitTEvt-ezOVHbwgD7igxU07qff5EUk0E65ItYw6i0eCDG_t2B5lanp-8W/pub';
-  final String ourWebsiteUrl = 'http://lindgrenmedia.com';
+  final String ourWebsiteUrl =
+      'https://www.medicalchannelnetwork.com/pages/about-us';
   final String iOSAppId = '1596502606';
 
   //social links

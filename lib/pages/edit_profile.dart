@@ -12,8 +12,13 @@ import '../utils/snacbar.dart';
 class EditProfile extends StatefulWidget {
   final String? name;
   final String? imageUrl;
+  final String? head;
 
-  EditProfile({Key? key, required this.name, required this.imageUrl})
+  EditProfile(
+      {Key? key,
+      required this.name,
+      required this.imageUrl,
+      required this.head})
       : super(key: key);
 
   @override
@@ -26,14 +31,15 @@ class _EditProfileState extends State<EditProfile> {
 
   String? name;
   String? imageUrl;
-
   File? imageFile;
   String? fileName;
   bool loading = false;
+  List img = ['', ''];
 
   var formKey = GlobalKey<FormState>();
   var scaffoldKey = GlobalKey<ScaffoldState>();
   var nameCtrl = TextEditingController();
+  var headlinecntrl = TextEditingController();
 
   Future pickImage() async {
     final _imagePicker = ImagePicker();
@@ -77,13 +83,16 @@ class _EditProfileState extends State<EditProfile> {
 
           imageFile == null
               ? await sb
-                  .updateUserProfile(nameCtrl.text, imageUrl!)
+                  .updateUserProfile(
+                      nameCtrl.text, imageUrl!, headlinecntrl.text)
                   .then((value) {
                   openSnacbar(scaffoldKey, 'updated successfully'.tr());
                   setState(() => loading = false);
                 })
-              : await uploadPicture().then((value) =>
-                  sb.updateUserProfile(nameCtrl.text, imageUrl!).then((_) {
+              : await uploadPicture().then((value) => sb
+                      .updateUserProfile(
+                          nameCtrl.text, imageUrl!, headlinecntrl.text)
+                      .then((_) {
                     openSnacbar(scaffoldKey, 'updated successfully'.tr());
                     setState(() => loading = false);
                   }));
@@ -96,91 +105,105 @@ class _EditProfileState extends State<EditProfile> {
   void initState() {
     super.initState();
     nameCtrl.text = name!;
+    headlinecntrl.text = widget.head!;
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        key: scaffoldKey,
-        appBar: AppBar(
-          title: Text('edit profile').tr(),
-        ),
-        body: ListView(
-          padding: const EdgeInsets.all(25),
-          children: <Widget>[
-            InkWell(
-              child: CircleAvatar(
-                radius: 70,
-                backgroundColor: Colors.grey[300],
-                child: Container(
-                  height: 120,
-                  width: 120,
-                  decoration: BoxDecoration(
-                      border: Border.all(width: 1, color: Colors.grey[800]!),
-                      color: Colors.grey[500],
-                      shape: BoxShape.circle,
-                      image: DecorationImage(
-                          image: (imageFile == null
-                              ? CachedNetworkImageProvider(imageUrl!)
-                              : FileImage(imageFile!)) as ImageProvider<Object>,
-                          fit: BoxFit.cover)),
-                  child: Align(
-                      alignment: Alignment.bottomRight,
-                      child: Icon(
-                        Icons.edit,
-                        size: 30,
-                        color: Colors.black,
-                      )),
-                ),
+      key: scaffoldKey,
+      appBar: AppBar(
+        title: Text('edit profile').tr(),
+      ),
+      body: ListView(
+        padding: const EdgeInsets.all(25),
+        children: <Widget>[
+          InkWell(
+            child: CircleAvatar(
+              radius: 70,
+              backgroundColor: Colors.grey[300],
+              child: Container(
+                height: 120,
+                width: 120,
+                decoration: BoxDecoration(
+                    border: Border.all(width: 1, color: Colors.grey[800]!),
+                    color: Colors.grey[500],
+                    shape: BoxShape.circle,
+                    image: DecorationImage(
+                        image: (imageFile == null
+                            ? CachedNetworkImageProvider(imageUrl!)
+                            : FileImage(imageFile!)) as ImageProvider<Object>,
+                        fit: BoxFit.cover)),
+                child: Align(
+                    alignment: Alignment.bottomRight,
+                    child: Icon(
+                      Icons.edit,
+                      size: 30,
+                      color: Colors.black,
+                    )),
               ),
-              onTap: () {
-                pickImage();
+            ),
+            onTap: pickImage,
+          ),
+          SizedBox(
+            height: 50,
+          ),
+          Form(
+              key: formKey,
+              child: Column(
+                children: [
+                  TextFormField(
+                    decoration: InputDecoration(
+                      hintText: 'enter new name'.tr(),
+                    ),
+                    controller: nameCtrl,
+                    validator: (value) {
+                      if (value!.length == 0) return "Name can't be empty";
+                      return null;
+                    },
+                  ),
+                  TextFormField(
+                    decoration: InputDecoration(
+                      hintText: 'Headline',
+                    ),
+                    controller: headlinecntrl,
+                    validator: (value) {
+                      if (value!.length == 0) return "Deadline can't be empty";
+                      return null;
+                    },
+                  ),
+                ],
+              )),
+          SizedBox(
+            height: 50,
+          ),
+          Container(
+            height: 45,
+            width: MediaQuery.of(context).size.width,
+            child: ElevatedButton(
+              style: ButtonStyle(
+                  backgroundColor: MaterialStateProperty.resolveWith(
+                      (states) => Theme.of(context).primaryColor),
+                  textStyle: MaterialStateProperty.resolveWith(
+                      (states) => TextStyle(color: Colors.white))),
+              child: loading == true
+                  ? Center(
+                      child: CircularProgressIndicator(
+                        backgroundColor: Colors.white,
+                      ),
+                    )
+                  : Text(
+                      'update profile',
+                      style:
+                          TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+                    ).tr(),
+              onPressed: () {
+                handleUpdateData();
               },
             ),
-            SizedBox(
-              height: 50,
-            ),
-            Form(
-                key: formKey,
-                child: TextFormField(
-                  decoration: InputDecoration(
-                    hintText: 'enter new name'.tr(),
-                  ),
-                  controller: nameCtrl,
-                  validator: (value) {
-                    if (value!.length == 0) return "Name can't be empty";
-                    return null;
-                  },
-                )),
-            SizedBox(
-              height: 50,
-            ),
-            Container(
-              height: 45,
-              width: MediaQuery.of(context).size.width,
-              child: ElevatedButton(
-                style: ButtonStyle(
-                    backgroundColor: MaterialStateProperty.resolveWith(
-                        (states) => Theme.of(context).primaryColor),
-                    textStyle: MaterialStateProperty.resolveWith(
-                        (states) => TextStyle(color: Colors.white))),
-                child: loading == true
-                    ? Center(
-                        child: CircularProgressIndicator(
-                          backgroundColor: Colors.white,
-                        ),
-                      )
-                    : Text(
-                        'update profile',
-                        style: TextStyle(
-                            fontSize: 16, fontWeight: FontWeight.w600),
-                      ).tr(),
-                onPressed: () {
-                  handleUpdateData();
-                },
-              ),
-            ),
-          ],
-        ));
+          ),
+        ],
+      ),
+    );
   }
 }

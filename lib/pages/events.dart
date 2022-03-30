@@ -178,39 +178,220 @@
 //   }
 // }
 
-import 'package:flutter/material.dart';
-import 'package:flutter_icons/flutter_icons.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:line_icons/line_icons.dart';
+import 'package:news_app/pages/search.dart';
+import 'package:news_app/pages/sign_up.dart';
+import 'package:news_app/utils/cached_image.dart';
 import 'package:news_app/utils/empty.dart';
+import 'package:news_app/utils/sign_in_dialog.dart';
+import 'package:news_app/widgets/post_container.dart';
+import 'package:news_app/widgets/uploadContenttype.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/material.dart';
+import 'package:news_app/blocs/sign_in_bloc.dart';
+import 'package:news_app/pages/uploadMedia.dart';
+import 'package:news_app/utils/next_screen.dart';
+import 'package:provider/provider.dart';
 
-class Events extends StatelessWidget {
+class Engage extends StatefulWidget {
+  @override
+  _EngageState createState() => _EngageState();
+}
+
+class _EngageState extends State<Engage> {
+  final _scaffoldkey = GlobalKey<ScaffoldState>();
   @override
   Widget build(BuildContext context) {
+    final sb = context.watch<SignInBloc>();
     return Scaffold(
+      key: _scaffoldkey,
       appBar: AppBar(
-        centerTitle: false,
-        automaticallyImplyLeading: false,
-        elevation: 0,
+        leading: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+            child: sb.uid != null
+                ? CustomCacheImage(
+                    radius: 10,
+                    height: MediaQuery.of(context).size.height * 0.10,
+                    imageUrl: sb.imageUrl,
+                  )
+                : Image(
+                    height: 100,
+                    width: 50,
+                    image: AssetImage('assets/images/userlogin.png'),
+                    fit: BoxFit.fill,
+                  )),
+        title: InkWell(
+          onTap: () {
+            sb.uid != null ? botomsheet(sb) : openSignInDialog(context);
+          },
+          child: Padding(
+            padding: EdgeInsets.symmetric(horizontal: 5),
+            child: Container(
+                height: 40,
+                width: MediaQuery.of(context).size.width * 0.7,
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(30),
+                    border: Border.all(color: Colors.grey, width: 2)),
+                child: Center(
+                    child: sb.uid != null
+                        ? Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 10),
+                            child: Text(
+                              'What you want to upload? ${sb.name!}',
+                              overflow: TextOverflow.ellipsis,
+                              style:
+                                  TextStyle(color: Colors.black, fontSize: 13),
+                            ),
+                          )
+                        : Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 10),
+                            child: Text(
+                              'What you want to upload?',
+                              style:
+                                  TextStyle(color: Colors.black, fontSize: 13),
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                          ))),
+          ),
+        ),
         actions: [
           IconButton(
-            onPressed: () {},
-            icon: Icon(Feather.rotate_ccw, size: 22),
-          ),
+              onPressed: () {
+                sb.uid != null ? botomsheet(sb) : openSignInDialog(context);
+              },
+              icon: Icon((Icons.add_box_outlined))),
+          // IconButton(
+          //   onPressed: () {
+          //     nextScreen(context, SearchPage());
+          //   },
+          //   icon: Icon(Icons.search),
+          // ),
         ],
       ),
-      body: RefreshIndicator(
-        child: ListView(
+      body: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 20),
+        child: Column(
           children: [
-            SizedBox(
-              height: MediaQuery.of(context).size.height * 0.35,
+            StreamBuilder<QuerySnapshot>(
+              stream: FirebaseFirestore.instance
+                  .collection('engageTab')
+                  .orderBy('datanow', descending: true)
+                  .snapshots(),
+              builder: (BuildContext context,
+                  AsyncSnapshot<QuerySnapshot> snapshot) {
+                if (!snapshot.hasData) {
+                  return LinearProgressIndicator();
+                } else if (snapshot.data!.docs.isEmpty)
+                  return Expanded(
+                    child: ListView(
+                      children: [
+                        SizedBox(
+                          height: MediaQuery.of(context).size.height * 0.3,
+                        ),
+                        EmptyPage(
+                            icon: LineIcons.book,
+                            message: 'No Posts Found',
+                            message1: 'Be the first to Post'),
+                      ],
+                    ),
+                  );
+                return Expanded(
+                  child: ListView.builder(
+                      itemCount: snapshot.data!.docs.length,
+                      itemBuilder: (context, index) {
+                        var data = snapshot.data!.docs[index];
+                        return PostContainer(
+                          data: data,
+                        );
+                      }),
+                );
+              },
             ),
-            EmptyPage(
-                icon: Feather.clipboard, message: 'Comming Soon', message1: ''),
           ],
         ),
-        onRefresh: () async {
-          print('object');
-        },
       ),
     );
+  }
+
+  botomsheet(SignInBloc sb) {
+    showBottomSheet(
+        elevation: 4,
+        backgroundColor: Colors.indigoAccent[50],
+        context: context,
+        builder: (context) {
+          return Container(
+            height: 150,
+            child: Column(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(top: 20),
+                  child: Text('Select Upload Type'),
+                ),
+                Divider(
+                  thickness: 1,
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+                Row(
+                  children: [
+                    UploadType(
+                      ontap: () {
+                        sb.uid != null
+                            ? nextScreen(
+                                context,
+                                UploadMedia(
+                                  tag: 'text',
+                                  data: sb,
+                                ))
+                            : openSignInDialog(context);
+                      },
+                      icon: Icon(
+                        Icons.edit,
+                        color: Colors.red,
+                      ),
+                      type: 'Text',
+                    ),
+                    UploadType(
+                      ontap: () {
+                        sb.uid != null
+                            ? nextScreen(
+                                context,
+                                UploadMedia(
+                                  tag: 'image',
+                                  data: sb,
+                                ))
+                            : openSignInDialog(context);
+                      },
+                      icon: Icon(
+                        Icons.photo,
+                        color: Colors.green,
+                      ),
+                      type: 'Image',
+                    ),
+                    UploadType(
+                      ontap: () {
+                        sb.uid != null
+                            ? nextScreen(
+                                context,
+                                UploadMedia(
+                                  tag: 'video',
+                                  data: sb,
+                                ))
+                            : openSignInDialog(context);
+                      },
+                      icon: Icon(
+                        Icons.video_call,
+                        color: Colors.amber,
+                      ),
+                      type: 'Video',
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          );
+        });
   }
 }

@@ -6,7 +6,6 @@ class Article {
   String? contentType;
   String? title;
   String? description;
-  String? thumbnailImagelUrl;
   String? youtubeVideoUrl;
   String? videoID;
   int? loves;
@@ -21,7 +20,6 @@ class Article {
       this.contentType,
       this.title,
       this.description,
-      this.thumbnailImagelUrl,
       this.youtubeVideoUrl,
       this.videoID,
       this.loves,
@@ -38,7 +36,6 @@ class Article {
         contentType: d['content type'],
         title: d['title'],
         description: d['description'],
-        thumbnailImagelUrl: d['image url'],
         youtubeVideoUrl: d['youtube url'],
         videoID: d['content type'] == 'video'
             ? AppService.getYoutubeVideoIdFromUrl(d['youtube url'])
