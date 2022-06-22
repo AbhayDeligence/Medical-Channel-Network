@@ -1,8 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_icons/flutter_icons.dart';
+
 import 'package:news_app/models/article.dart';
-import 'package:easy_localization/easy_localization.dart';
 
 class ViewsCount extends StatefulWidget {
   final Article article;
@@ -51,8 +50,8 @@ class _ViewsCountState extends State<ViewsCount> {
 
   @override
   Widget build(BuildContext context) {
-    final String collectionName = 'contents';
-    final String documentName = widget.article.timestamp!;
+    // final String collectionName = 'contents';
+    // final String documentName = widget.article.timestamp!;
 
     return Container(
       child: Row(

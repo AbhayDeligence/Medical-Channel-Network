@@ -44,17 +44,14 @@ class ArticleNotificationBloc extends ChangeNotifier {
   Future<Null> getData(mounted) async {
     await getNotificationsList().then((list)async {
       if(list.isNotEmpty){
-      
       _hasData = true;
       QuerySnapshot rawData;
-
         rawData = await firestore
             .collection('contents')
             .where('timestamp', whereIn: list)
             .limit(10)
             .get();
 
-        
         if(rawData.docs.isNotEmpty){
           if (mounted) {
             _isLoading = false;

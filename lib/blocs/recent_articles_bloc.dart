@@ -35,10 +35,6 @@ class RecentBloc extends ChangeNotifier{
           .limit(4)
           .get();
 
-
-
-
-
     if (rawData.docs.length > 0) {
       _lastVisible = rawData.docs[rawData.docs.length - 1];
       if (mounted) {
@@ -51,7 +47,6 @@ class RecentBloc extends ChangeNotifier{
       _isLoading = false;
       print('no items available');
       notifyListeners();
-      
     }
     return null;
   }

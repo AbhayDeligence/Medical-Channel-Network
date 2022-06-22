@@ -26,96 +26,120 @@ class _MobileVerificationState extends State<MobileVerification> {
   Widget build(BuildContext context) {
     final sb = context.watch<SignInBloc>();
 
-    return Scaffold(
-      body: Container(
-        width: MediaQuery.of(context).size.width,
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 18.0, vertical: 10),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  AppName(
-                    fontSize: 30,
-                  ),
-                ],
-              ),
-              Text(
-                'Please Verify Your Mobile',
-                style: TextStyle(fontSize: 18),
-              ),
-              ListTile(
-                leading: CountryCodePicker(
-                  onChanged: (value) {
-                    countryCode = value.dialCode!;
-                  },
-                  initialSelection: 'US',
-                  favorite: ['US', 'BR', 'IN'],
-                  showCountryOnly: false,
-                  showOnlyCountryWhenClosed: false,
-                  alignLeft: false,
+    return LayoutBuilder(builder: (context, constraints) {
+      if (constraints.maxWidth > 900) {
+        return customUI();
+      }
+      return Scaffold(
+        body: Container(
+          width: MediaQuery.of(context).size.width,
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 18.0, vertical: 10),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    AppName(
+                      fontSize: 30,
+                    ),
+                  ],
                 ),
-                title: Container(
-                    child: TextField(
-                  maxLength: 10,
-                  keyboardType: TextInputType.phone,
-                  style: TextStyle(fontSize: 20),
-                  cursorColor: Colors.grey,
-                  controller: phncontroller,
-                  decoration: InputDecoration(
-                    hintText: 'Enter Number',
-                    hintStyle: TextStyle(fontSize: 18),
-                    focusColor: Colors.red,
-                    focusedBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(color: Colors.grey)),
-                    enabledBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(color: Colors.grey)),
+                Text(
+                  'Please Verify Your Mobile',
+                  style: TextStyle(fontSize: 18),
+                ),
+                ListTile(
+                  leading: CountryCodePicker(
+                    onChanged: (value) {
+                      countryCode = value.dialCode!;
+                    },
+                    initialSelection: 'US',
+                    favorite: ['US', 'BR', 'IN'],
+                    showCountryOnly: false,
+                    showOnlyCountryWhenClosed: false,
+                    alignLeft: false,
                   ),
-                )),
-              ),
-              Text(
-                'This is only for authentication purpose',
-                style: TextStyle(fontSize: 18),
-              ),
-              verify == true
-                  ? Container(
-                      margin: EdgeInsets.symmetric(horizontal: 30),
+                  title: Container(
                       child: TextField(
-                        keyboardType: TextInputType.phone,
-                        style: TextStyle(fontSize: 20),
-                        cursorColor: Colors.grey,
-                        controller: otpcontroller,
-                        decoration: InputDecoration(
-                          hintText: 'Enter Otp',
-                          hintStyle: TextStyle(fontSize: 18),
-                          focusColor: Colors.red,
-                          focusedBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(color: Colors.grey)),
-                          enabledBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(color: Colors.grey)),
+                    maxLength: 10,
+                    keyboardType: TextInputType.phone,
+                    style: TextStyle(fontSize: 20),
+                    cursorColor: Colors.grey,
+                    controller: phncontroller,
+                    decoration: InputDecoration(
+                      hintText: 'Enter Number',
+                      hintStyle: TextStyle(fontSize: 18),
+                      focusColor: Colors.red,
+                      focusedBorder: UnderlineInputBorder(
+                          borderSide: BorderSide(color: Colors.grey)),
+                      enabledBorder: UnderlineInputBorder(
+                          borderSide: BorderSide(color: Colors.grey)),
+                    ),
+                  )),
+                ),
+                Text(
+                  'This is only for authentication purpose',
+                  style: TextStyle(fontSize: 18),
+                ),
+                verify == true
+                    ? Container(
+                        margin: EdgeInsets.symmetric(horizontal: 30),
+                        child: TextField(
+                          keyboardType: TextInputType.phone,
+                          style: TextStyle(fontSize: 20),
+                          cursorColor: Colors.grey,
+                          controller: otpcontroller,
+                          decoration: InputDecoration(
+                            hintText: 'Enter Otp',
+                            hintStyle: TextStyle(fontSize: 18),
+                            focusColor: Colors.red,
+                            focusedBorder: UnderlineInputBorder(
+                                borderSide: BorderSide(color: Colors.grey)),
+                            enabledBorder: UnderlineInputBorder(
+                                borderSide: BorderSide(color: Colors.grey)),
+                          ),
                         ),
-                      ),
-                    )
-                  : SizedBox.shrink(),
-              verify == false
-                  ? InkWell(
-                      onTap: () {
-                        setState(() {
-                          verify = true;
-                        });
-                        verifyNo(phncontroller.text);
-                      },
-                      child: button('Send Otp'))
-                  : InkWell(
-                      onTap: () async {
-                        await verifyOtp(otpcontroller.text, sb);
-                      },
-                      child: button('Verify Otp'))
-            ],
+                      )
+                    : SizedBox.shrink(),
+                verify == false
+                    ? InkWell(
+                        onTap: () {
+                          setState(() {
+                            verify = true;
+                          });
+                          verifyNo(phncontroller.text);
+                        },
+                        child: button('Send Otp'))
+                    : InkWell(
+                        onTap: () async {
+                          await verifyOtp(otpcontroller.text, sb);
+                        },
+                        child: button('Verify Otp'))
+              ],
+            ),
           ),
+        ),
+      );
+    });
+  }
+  //edited
+  Widget customUI() {
+    return Container(
+      height: 30,
+      width: MediaQuery.of(context).size.width *0.5,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(20.0),
+        border: Border.all(style: BorderStyle.solid, color: Colors.black,width: 2),
+        gradient: LinearGradient(
+          colors: [
+            Theme.of(context).primaryColorLight,
+            Theme.of(context).primaryColorLight.withOpacity(0.5),
+            Colors.white,
+            Colors.white,
+          ],
         ),
       ),
     );
@@ -154,7 +178,6 @@ class _MobileVerificationState extends State<MobileVerification> {
 
   Future verifyNo(String number) async {
     number = countryCode + number.toString();
-
     await _auth.verifyPhoneNumber(
       phoneNumber: number,
       verificationCompleted: (phoneAuthCredential) async {},

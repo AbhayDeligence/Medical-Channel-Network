@@ -76,7 +76,7 @@ class _ProfilePageState extends State<ProfilePage>
               ),
               onTap: () => nextScreen(context, BookmarkPage()),
             ),
-            Divider(
+            const Divider(
               height: 3,
             ),
             ListTile(
@@ -135,7 +135,7 @@ class _ProfilePageState extends State<ProfilePage>
               ),
               onTap: () async => await AppService().openEmailSupport(),
             ),
-            Divider(
+            const Divider(
               height: 3,
             ),
 
@@ -165,13 +165,13 @@ class _ProfilePageState extends State<ProfilePage>
                     borderRadius: BorderRadius.circular(5)),
                 child: Icon(Feather.star, size: 20, color: Colors.white),
               ),
-              trailing: Icon(
+              trailing: const Icon(
                 Feather.chevron_right,
                 size: 20,
               ),
               onTap: () async => AppService().launchAppReview(context),
             ),
-            Divider(
+            const Divider(
               height: 3,
             ),
 
@@ -199,19 +199,18 @@ class _ProfilePageState extends State<ProfilePage>
                 decoration: BoxDecoration(
                     color: Colors.redAccent,
                     borderRadius: BorderRadius.circular(5)),
-                child: Icon(Feather.lock, size: 20, color: Colors.white),
+                child: const Icon(Feather.lock, size: 20, color: Colors.white),
               ),
-              trailing: Icon(
+              trailing: const Icon(
                 Feather.chevron_right,
                 size: 20,
               ),
               onTap: () async => AppService()
                   .openLinkWithCustomTab(context, Config().privacyPolicyUrl),
             ),
-            Divider(
+            const Divider(
               height: 3,
             ),
-
             ListTile(
               title: Text('about us').tr(),
               leading: Container(
@@ -264,7 +263,7 @@ class GuestUserUI extends StatelessWidget {
                 tag: 'popup',
               )),
         ),
-        SizedBox(
+        const SizedBox(
           height: 20,
         ),
       ],
@@ -288,7 +287,7 @@ class UserUI extends StatelessWidget {
                   radius: 60,
                   backgroundColor: Colors.grey[300],
                   backgroundImage: CachedNetworkImageProvider(sb.imageUrl!)),
-              SizedBox(
+              const SizedBox(
                 height: 15,
               ),
               Text(
@@ -333,7 +332,7 @@ class UserUI extends StatelessWidget {
                   imageUrl: sb.imageUrl,
                   head: sb.headline,
                 ))),
-        Divider(
+        const Divider(
           height: 3,
         ),
         ListTile(
@@ -346,7 +345,7 @@ class UserUI extends StatelessWidget {
                 borderRadius: BorderRadius.circular(5)),
             child: Icon(Feather.log_out, size: 20, color: Colors.white),
           ),
-          trailing: Icon(
+          trailing: const Icon(
             Feather.chevron_right,
             size: 20,
           ),
@@ -354,7 +353,7 @@ class UserUI extends StatelessWidget {
         ),
         SizedBox(
           height: 15,
-        )
+        ),
       ],
     );
   }
@@ -390,85 +389,5 @@ class UserUI extends StatelessWidget {
             ],
           );
         });
-  }
-}
-
-class StorePage extends StatefulWidget {
-  @override
-  State<StorePage> createState() => _StorePageState();
-}
-
-class _StorePageState extends State<StorePage> {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        centerTitle: false,
-        automaticallyImplyLeading: false,
-        elevation: 0,
-        actions: <Widget>[
-          IconButton(
-            icon: Icon(
-              Feather.rotate_cw,
-              size: 22,
-            ),
-            onPressed: () {},
-          )
-        ],
-      ),
-      body: RefreshIndicator(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Expanded(
-              child: Image(
-                width: MediaQuery.of(context).size.width,
-                image: AssetImage('assets/images/Storepagegraphic.png'),
-                fit: BoxFit.fitWidth,
-              ),
-            ),
-            // SizedBox(
-            //   height: 10,
-            // ),
-            // Text(
-            //   'Store',
-            //   style: TextStyle(fontWeight: FontWeight.w800, fontSize: 25),
-            // ),
-            // SizedBox(
-            //   height: 20,
-            // ),
-            // Container(
-            //   width: MediaQuery.of(context).size.width / 2,
-            //   child: Text(
-            //     'A location to find learmning for CEUs events, and material resources specific to the healthcare profession',
-            //     textAlign: TextAlign.center,
-            //   ),
-            // ),
-            // SizedBox(
-            //   height: 40,
-            // ),
-            // Row(
-            //   mainAxisAlignment: MainAxisAlignment.center,
-            //   children: [
-            //     AppName(fontSize: 20),
-            //     RichText(
-            //       text: TextSpan(
-            //         text: ' Network',
-            //         style: TextStyle(
-            //             fontSize: 20,
-            //             fontFamily: 'Archivo',
-            //             fontWeight: FontWeight.w900,
-            //             color: Colors.blue[800]),
-            //       ),
-            //     )
-            //   ],
-            // )
-          ],
-        ),
-        onRefresh: () async {
-          print('object');
-        },
-      ),
-    );
   }
 }

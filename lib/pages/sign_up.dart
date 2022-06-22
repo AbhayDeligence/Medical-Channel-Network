@@ -1,10 +1,9 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:multi_select_flutter/multi_select_flutter.dart';
 import 'package:news_app/blocs/sign_in_bloc.dart';
 import 'package:news_app/pages/add_badge_Screen.dart';
-import 'package:news_app/pages/done.dart';
+
 import 'package:news_app/pages/mobile_verify.dart';
 import 'package:news_app/pages/sign_in.dart';
 import 'package:news_app/services/app_service.dart';
@@ -447,7 +446,7 @@ class _SignUpPageState extends State<SignUpPage> {
                     });
                   },
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 20,
                 ),
                 Container(
@@ -472,7 +471,7 @@ class _SignUpPageState extends State<SignUpPage> {
                           .map((e) => MultiSelectItem(e, e))
                           .toList()),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 30,
                 ),
                 InkWell(
@@ -511,7 +510,7 @@ class _SignUpPageState extends State<SignUpPage> {
                             : snapshot.nearmc!);
                       })),
                 ),
-                Divider(
+                const Divider(
                   color: Colors.grey,
                   thickness: 1,
                 ),

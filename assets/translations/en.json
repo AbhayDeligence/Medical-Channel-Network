@@ -35,9 +35,9 @@
 
 
 
-    "search news" : "Search News",
-    "popular news" : "Popular News",
-    "recent news" : "Recent News",
+    "search news" : "Search Posts",
+    "popular news" : "Popular Posts",
+    "recent news" : "Recent Posts",
     "explore": "Explore",
     "featured": "Featured",
     "view all" : "view all",
@@ -110,7 +110,7 @@
     "notifications" : "Notifications",
     "notification details" : "Notification Details",
     "custom notifications": "Custom Notifications",
-    "news notifications": "News Notifications",
+    "news notifications": "Posts Notifications",
     "no notification": "No notifications found",
 
 

@@ -22,10 +22,8 @@ class _SplashPageState extends State<SplashPage> {
       sb.isSignedIn == true || sb.guestUser == true 
       ? gotoHomePage()
       : gotoSignInPage();
-      
     });
   }
-
 
   gotoHomePage () {
     final SignInBloc sb = context.read<SignInBloc>();
@@ -34,9 +32,6 @@ class _SplashPageState extends State<SplashPage> {
     }
     nextScreenReplace(context, HomePage());
   }
-
-
-
 
   gotoSignInPage (){
     nextScreenReplace(context, WelcomePage());
@@ -47,11 +42,6 @@ class _SplashPageState extends State<SplashPage> {
     afterSplash();
     super.initState();
   }
-
-
-
-
-
 
   @override
   Widget build(BuildContext context) {

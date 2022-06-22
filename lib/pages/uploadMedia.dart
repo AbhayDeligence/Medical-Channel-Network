@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:news_app/blocs/sign_in_bloc.dart';
 import 'package:news_app/services/app_service.dart';
-import 'package:news_app/utils/cached_image.dart';
+
 import 'package:news_app/utils/snacbar.dart';
 import 'package:news_app/utils/toast.dart';
 import 'package:provider/provider.dart';
@@ -95,7 +95,7 @@ class _UploadMediaState extends State<UploadMedia> {
                         key: formKey,
                         child: Column(
                           children: [
-                            SizedBox(
+                            const SizedBox(
                               height: 20,
                             ),
                             TextFormField(
@@ -119,7 +119,7 @@ class _UploadMediaState extends State<UploadMedia> {
                   ],
                 )
               else
-                SizedBox(),
+                const SizedBox(),
               SizedBox(
                 height: 30,
               ),
@@ -163,6 +163,7 @@ class _UploadMediaState extends State<UploadMedia> {
               'userUID': widget.data!.uid,
               'datanow': date,
               'likes': [],
+              'headline': widget.data!.headline
             })
             .onError((error, stackTrace) =>
                 openSnacbar(_scaffoldKey, 'Something went wrong..'))
@@ -184,6 +185,7 @@ class _UploadMediaState extends State<UploadMedia> {
                 'datanow': date,
                 'videoUrl': '',
                 'likes': [],
+                'headline': widget.data!.headline
               }))
           .then((value) => openToast1(context, 'Uploaded Successfully...'))
           .then((value) => Navigator.pop(context));
@@ -202,6 +204,7 @@ class _UploadMediaState extends State<UploadMedia> {
               'datanow': date,
               'videoUrl': videoController.text,
               'likes': [],
+              'headline': widget.data!.headline
             })
             .then((value) => openToast1(context, 'Uploaded Successfully...'))
             .then((value) => Navigator.pop(context));

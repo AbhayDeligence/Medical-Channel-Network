@@ -51,7 +51,6 @@ class _EngagetabCommentsState extends State<EngagetabComments> {
                   builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
                     if (!snapshot.hasData)
                       return Container(
-                        // prometheus
                         height: 5,
                         child: LinearProgressIndicator(
                           minHeight: 2,
@@ -101,10 +100,11 @@ class _EngagetabCommentsState extends State<EngagetabComments> {
                                             },
                                             child: Text('Yes')),
                                         OutlinedButton(
-                                            onPressed: () {
-                                              Navigator.pop(context);
-                                            },
-                                            child: Text('No'))
+                                          onPressed: () {
+                                            Navigator.pop(context);
+                                          },
+                                          child: Text('No'),
+                                        ),
                                       ],
                                     );
                                   });
@@ -133,7 +133,7 @@ class _EngagetabCommentsState extends State<EngagetabComments> {
                       },
                     );
                   })),
-          Divider(
+          const Divider(
             height: 1,
             color: Colors.black26,
           ),

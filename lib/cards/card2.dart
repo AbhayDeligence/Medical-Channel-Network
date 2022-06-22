@@ -15,6 +15,7 @@ class Card2 extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print('------${d.imageurl}');
     return InkWell(
       child: Container(
         decoration: BoxDecoration(
@@ -37,7 +38,9 @@ class Card2 extends StatelessWidget {
                   child: Hero(
                     tag: heroTag,
                     child: CustomCacheImage(
-                      imageUrl: "https://img.youtube.com/vi/${d.videoID}/0.jpg",
+                      imageUrl: d.imageurl == ''
+                          ? "https://img.youtube.com/vi/${d.videoID}/0.jpg"
+                          : d.imageurl,
                       radius: 5.0,
                       circularShape: false,
                     ),
@@ -60,7 +63,7 @@ class Card2 extends StatelessWidget {
                     overflow: TextOverflow.ellipsis,
                     style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 5,
                   ),
                   Text(
@@ -72,18 +75,18 @@ class Card2 extends StatelessWidget {
                           fontSize: 14,
                           fontWeight: FontWeight.w500,
                           color: Theme.of(context).secondaryHeaderColor)),
-                  SizedBox(
+                  const SizedBox(
                     height: 10,
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      Icon(
+                      const Icon(
                         CupertinoIcons.time,
                         size: 16,
                         color: Colors.grey,
                       ),
-                      SizedBox(
+                      const SizedBox(
                         width: 3,
                       ),
                       Text(
@@ -92,7 +95,7 @@ class Card2 extends StatelessWidget {
                             fontSize: 12,
                             color: Theme.of(context).secondaryHeaderColor),
                       ),
-                      Spacer(),
+                      const Spacer(),
                       // Icon(
                       //   Icons.favorite,
                       //   size: 16,

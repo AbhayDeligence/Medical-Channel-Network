@@ -69,7 +69,7 @@ class _VideoArticlesState extends State<VideoArticles>
         elevation: 0,
         actions: <Widget>[
           IconButton(
-            icon: Icon(
+            icon: const Icon(
               AntDesign.search1,
               size: 22,
             ),
@@ -91,7 +91,7 @@ class _VideoArticlesState extends State<VideoArticles>
                 : false,
             badgeContent: Container(),
             child: IconButton(
-              icon: Icon(
+              icon: const Icon(
                 LineIcons.bell,
                 size: 25,
               ),
@@ -137,7 +137,7 @@ class _VideoArticlesState extends State<VideoArticles>
                   return Opacity(
                     opacity: vb.isLoading ? 1.0 : 0.0,
                     child: vb.lastVisible == null
-                        ? LoadingCard(height: 250)
+                        ? const LoadingCard(height: 250)
                         : Center(
                             child: SizedBox(
                                 width: 32.0,

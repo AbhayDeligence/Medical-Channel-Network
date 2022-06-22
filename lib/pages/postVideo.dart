@@ -61,7 +61,7 @@ class _PostVideoState extends State<PostVideo> {
                             onPressed: () {
                               Navigator.pop(context);
                             },
-                            icon: Icon(
+                            icon: const Icon(
                               Icons.keyboard_backspace,
                               color: Colors.white,
                             ),
@@ -70,7 +70,7 @@ class _PostVideoState extends State<PostVideo> {
                       ),
                     ),
                   ],
-                ),
+                ), 
                 Expanded(
                   child: ListTile(
                     title: Text(

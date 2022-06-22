@@ -73,7 +73,7 @@ class _NotificationsPageState extends State<NotificationsPage>
             controller: _tabController,
             indicatorSize: TabBarIndicatorSize.tab,
             labelColor: Theme.of(context).primaryColor,
-            unselectedLabelColor: Color(0xff5f6368), //niceish grey
+            unselectedLabelColor: Color(0xff5f6368), 
             isScrollable: false,
             onTap: (index) {
               //_tabController.animateTo(index);

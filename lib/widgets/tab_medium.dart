@@ -14,8 +14,6 @@ import 'package:news_app/tabs/category_tab4.dart';
 import 'package:news_app/tabs/tab0.dart';
 import 'package:provider/provider.dart';
 
-
-
 class TabMedium extends StatefulWidget {
   final ScrollController? sc;
   final TabController? tc;
@@ -51,7 +49,7 @@ class _TabMediumState extends State<TabMedium> {
             db.getData(mounted);
           }
         }
-      } 
+      }
       else if(sb.tabIndex == 1){
         if (!cb1.isLoading) {
           if (this.widget.sc!.offset >= this.widget.sc!.position.maxScrollExtent && !this.widget.sc!.position.outOfRange) {

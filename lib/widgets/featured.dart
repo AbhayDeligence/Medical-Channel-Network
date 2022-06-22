@@ -41,7 +41,7 @@ class _FeaturedState extends State<Featured> {
             },
           ),
         ),
-        SizedBox(
+        const SizedBox(
           height: 5,
         ),
         Center(

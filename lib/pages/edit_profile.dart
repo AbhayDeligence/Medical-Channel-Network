@@ -174,7 +174,7 @@ class _EditProfileState extends State<EditProfile> {
                   ),
                 ],
               )),
-          SizedBox(
+          const SizedBox(
             height: 50,
           ),
           Container(

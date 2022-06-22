@@ -10,7 +10,6 @@ class PopularBloc extends ChangeNotifier{
 
   final FirebaseFirestore firestore = FirebaseFirestore.instance;
  
-
   Future getData() async {
     QuerySnapshot rawData;
       rawData = await firestore
@@ -18,13 +17,10 @@ class PopularBloc extends ChangeNotifier{
           .orderBy('loves', descending: true)
           .limit(5)
           .get();
-      
       List<DocumentSnapshot> _snap = [];
       _snap.addAll(rawData.docs);
       _data = _snap.map((e) => Article.fromFirestore(e)).toList();
       notifyListeners();
-    
-    
   }
 
   onRefresh() {

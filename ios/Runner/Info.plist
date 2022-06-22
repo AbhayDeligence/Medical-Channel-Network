@@ -59,11 +59,13 @@
 		<true/>
 	</dict>
 	<key>NSCameraUsageDescription</key>
-	<string>This app requires this persmission to upload your selected photos from you device</string>
+	<string>This app lets you capture and share photos with others from your camera.</string>
 	<key>NSMicrophoneUsageDescription</key>
-	<string>This app requires this persmission to upload your selected photos from you device</string>
+	<string>This app lets you browse, record and share videos with others from your library.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>This app requires this persmission to upload your selected photos from you device</string>
+	<string>This app lets you browse and share photos with others from your library.</string>
+	<key>PHPhotoLibraryPreventAutomaticLimitedAccessAlert</key>
+	<true/>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>fetch</string>
@@ -76,8 +78,6 @@
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
-		<string>UIInterfaceOrientationLandscapeLeft</string>
-		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
 	<key>UISupportedInterfaceOrientations~ipad</key>
 	<array>

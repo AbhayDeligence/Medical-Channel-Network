@@ -16,6 +16,8 @@ void main() async {
     fallbackLocale: Locale('en'),
     startLocale: Locale('en'),
     useOnlyLangCode: true,
-    child: MyApp(),
+    child:
+        //StorePartner()
+        MyApp(),
   ));
 }

@@ -1,9 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:new_version/new_version.dart';
+
 import 'package:news_app/blocs/notification_bloc.dart';
 import 'package:news_app/pages/explore.dart';
-import 'package:news_app/pages/profile.dart';
+
+import 'package:news_app/pages/store_page.dart';
 import 'package:news_app/pages/videos.dart';
 import 'package:provider/provider.dart';
 
@@ -51,6 +54,33 @@ class _HomePageState extends State<HomePage> {
       //   }
       // });
     });
+    final newVersion = NewVersion(
+      androidId: 'com.lindgrenmedia.mcn',
+      iOSId: 'com.lindgrenmedia.mcn',
+    );
+    const simpleBehavior = true;
+
+    basicStatusCheck(NewVersion newVersion) async {
+      newVersion.showAlertIfNecessary(context: context);
+    }
+
+    advancedStatusCheck(NewVersion newVersion) async {
+      final status = await newVersion.getVersionStatus();
+      if (status != null) {
+        newVersion.showUpdateDialog(
+          context: context,
+          versionStatus: status,
+          dialogTitle: 'New Update Available',
+          dialogText: 'New version of app is available. Want to install ?',
+        );
+      }
+    }
+
+    if (simpleBehavior) {
+      basicStatusCheck(newVersion);
+    } else {
+      advancedStatusCheck(newVersion);
+    }
   }
 
   @override
@@ -76,17 +106,33 @@ class _HomePageState extends State<HomePage> {
       onWillPop: () async => await _onWillPop(),
       child: Scaffold(
         bottomNavigationBar: _bottomNavigationBar(),
-        body: PageView(
-          controller: _pageController,
-          allowImplicitScrolling: false,
-          physics: NeverScrollableScrollPhysics(),
-          children: <Widget>[
-            Explore(),
-            VideoArticles(),
-            Engage(),
-            StorePage(),
-          ],
-        ),
+        body: LayoutBuilder(builder: (context, constraints) {
+          if (constraints.maxWidth > 900) {
+            return PageView(
+              controller: _pageController,
+              allowImplicitScrolling: false,
+              physics: NeverScrollableScrollPhysics(),
+              children: <Widget>[
+                Explore(),
+                VideoArticles(),
+                Engage(),
+                StorePage(),
+              ],
+            );
+          } else {
+            return PageView(
+              controller: _pageController,
+              allowImplicitScrolling: false,
+              physics: NeverScrollableScrollPhysics(),
+              children: <Widget>[
+                Explore(),
+                VideoArticles(),
+                Engage(),
+                StorePage(),
+              ],
+            );
+          }
+        }),
       ),
     );
   }
@@ -124,7 +170,7 @@ class _HomePageState extends State<HomePage> {
               AssetImage('assets/images/3.png'),
               size: 25,
             ),
-            label: 'Store'),
+            label: 'Resources'),
       ],
     );
   }

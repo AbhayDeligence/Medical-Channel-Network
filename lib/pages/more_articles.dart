@@ -159,7 +159,7 @@ class _MoreArticlesState extends State<MoreArticles> {
                                 LoadingCard(
                                   height: 200,
                                 ),
-                                SizedBox(
+                                const SizedBox(
                                   height: 15,
                                 )
                               ],

@@ -20,7 +20,6 @@ class CategoryTab4Bloc extends ChangeNotifier{
   bool? _hasData;
   bool? get hasData => _hasData;
 
-
   Future<Null> getData(mounted, String category) async {
     QuerySnapshot rawData;
     
@@ -40,10 +39,6 @@ class CategoryTab4Bloc extends ChangeNotifier{
           .limit(4)
           .get();
 
-
-
-
-
     if (rawData.docs.length > 0) {
       _lastVisible = rawData.docs[rawData.docs.length - 1];
       if (mounted) {
@@ -55,7 +50,6 @@ class CategoryTab4Bloc extends ChangeNotifier{
     } else {
 
       if(_lastVisible == null){
-
         _isLoading = false;
         _hasData = false;
         print('no items');

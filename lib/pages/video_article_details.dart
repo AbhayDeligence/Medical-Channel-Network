@@ -10,7 +10,7 @@ import 'package:news_app/models/custom_color.dart';
 import 'package:news_app/pages/comments.dart';
 import 'package:news_app/services/app_service.dart';
 import 'package:news_app/utils/cached_image.dart';
-import 'package:news_app/utils/dialog.dart';
+
 import 'package:news_app/utils/sign_in_dialog.dart';
 import 'package:news_app/utils/toast.dart';
 import 'package:news_app/widgets/bookmark_icon.dart';
@@ -119,7 +119,9 @@ class _VideoArticleDetailsState extends State<VideoArticleDetails> {
         controller: _controller,
         showVideoProgressIndicator: true,
         thumbnail: CustomCacheImage(
-            imageUrl: "https://img.youtube.com/vi/${d.videoID}/0.jpg",
+            imageUrl: d.imageurl == ''
+                ? "https://img.youtube.com/vi/${d.videoID}/0.jpg"
+                : d.imageurl,
             radius: 0),
       ),
       builder: (context, player) {
@@ -201,7 +203,7 @@ class _VideoArticleDetailsState extends State<VideoArticleDetails> {
                                             fontWeight: FontWeight.w600),
                                       ),
                                     )),
-                                Spacer(),
+                                const Spacer(),
                                 IconButton(
                                     icon: BuildLoveIcon(
                                         collectionName: 'contents',
@@ -220,7 +222,7 @@ class _VideoArticleDetailsState extends State<VideoArticleDetails> {
                                     }),
                               ],
                             ),
-                            SizedBox(
+                            const SizedBox(
                               height: 10,
                             ),
                             Row(
@@ -239,7 +241,7 @@ class _VideoArticleDetailsState extends State<VideoArticleDetails> {
                                 ),
                               ],
                             ),
-                            SizedBox(
+                            const SizedBox(
                               height: 5,
                             ),
                             Text(
@@ -272,9 +274,9 @@ class _VideoArticleDetailsState extends State<VideoArticleDetails> {
                                             borderRadius:
                                                 BorderRadius.circular(3))),
                                   ),
-                                  icon: Icon(Feather.message_circle,
+                                  icon: const Icon(Feather.message_circle,
                                       color: Colors.white, size: 20),
-                                  label: Text('comments',
+                                  label: const Text('comments',
                                           style: TextStyle(color: Colors.white))
                                       .tr(),
                                   onPressed: () {
@@ -299,9 +301,9 @@ class _VideoArticleDetailsState extends State<VideoArticleDetails> {
                                             borderRadius:
                                                 BorderRadius.circular(3))),
                                   ),
-                                  icon: Icon(Feather.share,
+                                  icon: const Icon(Feather.share,
                                       color: Colors.white, size: 20),
-                                  label: Text('Share',
+                                  label: const Text('Share',
                                           style: TextStyle(color: Colors.white))
                                       .tr(),
                                   onPressed: () {
@@ -310,7 +312,7 @@ class _VideoArticleDetailsState extends State<VideoArticleDetails> {
                                             context: context,
                                             builder: (BuildContext context) {
                                               return AlertDialog(
-                                                title: Text(
+                                                title: const Text(
                                                     'Share this post to engage tab ?'),
                                                 actions: <Widget>[
                                                   TextButton(
@@ -341,6 +343,9 @@ class _VideoArticleDetailsState extends State<VideoArticleDetails> {
                                                               'videoUrl': d
                                                                   .youtubeVideoUrl,
                                                               'likes': [],
+                                                              'headline':
+                                                                  sb.headline
+                                                                  //edit
                                                             })
                                                             .then((value) =>
                                                                 openToast(
@@ -350,12 +355,12 @@ class _VideoArticleDetailsState extends State<VideoArticleDetails> {
                                                                 Navigator.pop(
                                                                     context));
                                                       },
-                                                      child: Text('Yes')),
+                                                      child: const Text('Yes')),
                                                   TextButton(
                                                       onPressed: () {
                                                         Navigator.pop(context);
                                                       },
-                                                      child: Text('No')),
+                                                      child: const Text('No')),
                                                 ],
                                               );
                                             })
@@ -364,7 +369,7 @@ class _VideoArticleDetailsState extends State<VideoArticleDetails> {
                                 ),
                               ],
                             ),
-                            SizedBox(
+                            const SizedBox(
                               height: 10,
                             ),
                             Row(
@@ -374,20 +379,19 @@ class _VideoArticleDetailsState extends State<VideoArticleDetails> {
                                 ViewsCount(
                                   article: d,
                                 ),
-                                SizedBox(
+                                const SizedBox(
                                   width: 20,
                                 ),
-
                                 LoveCount(
                                     collectionName: 'contents',
                                     timestamp: d.timestamp),
                               ],
                             ),
-                            SizedBox(
+                            const SizedBox(
                               height: 20,
                             ),
                             HtmlBodyWidget(htmlData: d.description!),
-                            SizedBox(
+                            const SizedBox(
                               height: 20,
                             ),
                             Container(

@@ -276,7 +276,7 @@ class SignInBloc extends ChangeNotifier {
       'organizationName': _orgname,
       'credentials': _initial,
       'workInMedicalCenter': _workinmc,
-      'headline': _headline
+      'headline': _headline ?? ''
     };
     await ref.set(userData);
   }
@@ -295,7 +295,7 @@ class SignInBloc extends ChangeNotifier {
     await sp.setString('image_url', _imageUrl!);
     await sp.setString('uid', _uid!);
     await sp.setString('sign_in_provider', _signInProvider!);
-    await sp.setString('headline', _headline!);
+    await sp.setString('headline', _headline ?? '');
   }
 
   Future getDataFromSp() async {
@@ -322,7 +322,7 @@ class SignInBloc extends ChangeNotifier {
       this._email = snap['email'];
       this._imageUrl = snap['image url'];
       this._orgname = snap['organizationName'];
-      this._headline = snap['headline'];
+      this._headline = snap['headline'] ?? '';
       print(_name);
     });
     notifyListeners();

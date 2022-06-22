@@ -45,7 +45,6 @@ void navigateToDetailsScreen (context, Article article, String? heroTag){
   }
 }
 
-
 void navigateToDetailsScreenByReplace (context, Article article, String? heroTag, bool? replace){
   if(replace == null || replace == false){
     navigateToDetailsScreen(context, article, heroTag);
@@ -54,7 +53,7 @@ void navigateToDetailsScreenByReplace (context, Article article, String? heroTag
       Navigator.pushReplacement(context, MaterialPageRoute(
         builder: (context) => VideoArticleDetails(data: article)),
       );
-    
+     
     }else{
       Navigator.pushReplacement(context, MaterialPageRoute(
         builder: (context) => ArticleDetails(data: article, tag: heroTag,)),

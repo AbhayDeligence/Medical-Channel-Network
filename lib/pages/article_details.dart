@@ -114,8 +114,6 @@ class _ArticleDetailsState extends State<ArticleDetails> {
                                 Row(
                                   children: <Widget>[
                                     Container(
-                                        // kkbk0005296
-                                        //6245907357
                                         alignment: Alignment.center,
                                         decoration: BoxDecoration(
                                           borderRadius:
@@ -142,7 +140,7 @@ class _ArticleDetailsState extends State<ArticleDetails> {
                                                 fontWeight: FontWeight.w600),
                                           ),
                                         )),
-                                    Spacer(),
+                                    const Spacer(),
                                     IconButton(
                                         icon: BuildLoveIcon(
                                             collectionName: 'contents',
@@ -159,16 +157,16 @@ class _ArticleDetailsState extends State<ArticleDetails> {
                                         onPressed: () {
                                           handleBookmarkClick();
                                         }),
-                                  ],
+                                  ]
                                 ),
-                                SizedBox(
+                                const SizedBox(
                                   height: 10,
                                 ),
                                 Row(
                                   children: <Widget>[
                                     Icon(CupertinoIcons.time_solid,
                                         size: 18, color: Colors.grey),
-                                    SizedBox(
+                                    const SizedBox(
                                       width: 5,
                                     ),
                                     Text(
@@ -180,7 +178,7 @@ class _ArticleDetailsState extends State<ArticleDetails> {
                                     ),
                                   ],
                                 ),
-                                SizedBox(
+                                const SizedBox(
                                   height: 5,
                                 ),
                                 Text(
@@ -284,14 +282,16 @@ class _ArticleDetailsState extends State<ArticleDetails> {
       flexibleSpace: FlexibleSpaceBar(
           background: widget.tag == null
               ? CustomCacheImage(
-                  imageUrl:
-                      "https://img.youtube.com/vi/${article.videoID}/0.jpg",
+                  imageUrl: article.imageurl == ''
+                      ? "https://img.youtube.com/vi/${article.videoID}/0.jpg"
+                      : article.imageurl,
                   radius: 0.0)
               : Hero(
                   tag: widget.tag!,
                   child: CustomCacheImage(
-                      imageUrl:
-                          "https://img.youtube.com/vi/${article.videoID}/0.jpg",
+                      imageUrl: article.imageurl == ''
+                          ? "https://img.youtube.com/vi/${article.videoID}/0.jpg"
+                          : article.imageurl,
                       radius: 0.0),
                 )),
       leading: IconButton(

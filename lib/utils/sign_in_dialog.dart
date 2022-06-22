@@ -25,7 +25,7 @@ openSignInDialog(context){
                 
                 Navigator.pop(context);
               }, 
-              child: Text('cancel').tr())
+              child: const Text('cancel').tr())
           ],
         );
       }

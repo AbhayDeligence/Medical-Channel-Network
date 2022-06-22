@@ -43,7 +43,7 @@ class Card1 extends StatelessWidget {
                           maxLines: 4,
                           overflow: TextOverflow.ellipsis,
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 10,
                         ),
                         Container(
@@ -77,8 +77,9 @@ class Card1 extends StatelessWidget {
                           child: Hero(
                               tag: heroTag,
                               child: CustomCacheImage(
-                                  imageUrl:
-                                      'https://img.youtube.com/vi/${d.videoID}/0.jpg',
+                                  imageUrl: d.imageurl == ''
+                                      ? 'https://img.youtube.com/vi/${d.videoID}/0.jpg'
+                                      : d.imageurl,
                                   radius: 5.0)),
                         ),
                         VideoIcon(
@@ -90,7 +91,7 @@ class Card1 extends StatelessWidget {
                   ),
                 ],
               ),
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
               Row(
@@ -100,7 +101,7 @@ class Card1 extends StatelessWidget {
                     color: Colors.grey,
                     size: 20,
                   ),
-                  SizedBox(
+                  const SizedBox(
                     width: 5,
                   ),
                   Text(
@@ -109,13 +110,13 @@ class Card1 extends StatelessWidget {
                         color: Theme.of(context).secondaryHeaderColor,
                         fontSize: 13),
                   ),
-                  Spacer(),
+                  const Spacer(),
                   // Icon(
                   //   Icons.favorite,
                   //   color: Theme.of(context).secondaryHeaderColor,
                   //   size: 20,
                   // ),
-                  SizedBox(
+                  const SizedBox(
                     width: 3,
                   ),
                   // Text(d.loves.toString(),

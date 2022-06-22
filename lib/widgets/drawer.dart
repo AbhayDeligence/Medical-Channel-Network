@@ -98,9 +98,7 @@ class DrawerMenu extends StatelessWidget {
                         AppService().openLinkWithCustomTab(
                             context, Config().privacyPolicyUrl);
                       } else if (index == 4) {
-                        // send email
                         nextScreen(context, CommentSugestion());
-                        //AppService().openEmailSupport();
                       }
                     },
                   );

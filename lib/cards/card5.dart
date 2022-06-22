@@ -35,7 +35,9 @@ class Card5 extends StatelessWidget {
                   child: Hero(
                     tag: heroTag,
                     child: CustomCacheImage(
-                      imageUrl: "https://img.youtube.com/vi/${d.videoID}/0.jpg",
+                      imageUrl: d.imageurl == ''
+                          ? "https://img.youtube.com/vi/${d.videoID}/0.jpg"
+                          : d.imageurl,
                       radius: 5.0,
                       circularShape: false,
                     ),
@@ -44,7 +46,7 @@ class Card5 extends StatelessWidget {
                 VideoIcon(
                   contentType: d.contentType,
                   iconSize: 80,
-                )
+                ),
               ],
             ),
             Container(

@@ -20,7 +20,7 @@ class SignInPage extends StatefulWidget {
   _SignInPageState createState() => _SignInPageState();
 }
 
-class _SignInPageState extends State<SignInPage> {
+class _SignInPageState extends  State<SignInPage> {
   bool offsecureText = true;
   Icon lockIcon = LockIcon().lock;
   var emailCtrl = TextEditingController();
@@ -128,7 +128,7 @@ class _SignInPageState extends State<SignInPage> {
                             fontWeight: FontWeight.w500,
                             color: Theme.of(context).secondaryHeaderColor))
                     .tr(),
-                SizedBox(
+                const SizedBox(
                   height: 80,
                 ),
                 TextFormField(
@@ -146,7 +146,7 @@ class _SignInPageState extends State<SignInPage> {
                     });
                   },
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 20,
                 ),
                 TextFormField(
@@ -155,7 +155,6 @@ class _SignInPageState extends State<SignInPage> {
                   decoration: InputDecoration(
                     labelText: 'Password',
                     hintText: 'Enter Password',
-                    //prefixIcon: Icon(Icons.vpn_key),
                     suffixIcon: IconButton(
                         icon: lockIcon,
                         onPressed: () {
@@ -172,7 +171,7 @@ class _SignInPageState extends State<SignInPage> {
                     });
                   },
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 50,
                 ),
                 Container(
@@ -183,7 +182,6 @@ class _SignInPageState extends State<SignInPage> {
                       style: TextStyle(color: Theme.of(context).primaryColor),
                     ).tr(),
                     onPressed: () {
-                      //nextScreen(context, ForgotPasswordPage());
                       Navigator.push(
                           context,
                           CupertinoPageRoute(
@@ -203,7 +201,7 @@ class _SignInPageState extends State<SignInPage> {
                                       fontSize: 16, color: Colors.white))
                               .tr()
                           : signInComplete == false
-                              ? CircularProgressIndicator(
+                              ? CircularProgressIndicator( 
                                   backgroundColor: Colors.white,
                                 )
                               : Text('sign in successful!',
@@ -214,7 +212,7 @@ class _SignInPageState extends State<SignInPage> {
                         handleSignInwithemailPassword();
                       }),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 10,
                 ),
                 Row(
@@ -232,7 +230,7 @@ class _SignInPageState extends State<SignInPage> {
                     )
                   ],
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 50,
                 ),
               ],

@@ -72,7 +72,7 @@ PageViewModel introPage(context, String title, String subtitle, String image) {
               wordSpacing: 1,
               color: Colors.black),
         ).tr(),
-        SizedBox(
+        const SizedBox(
           height: 8,
         ),
         Container(

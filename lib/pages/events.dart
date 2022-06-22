@@ -180,8 +180,7 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:line_icons/line_icons.dart';
-import 'package:news_app/pages/search.dart';
-import 'package:news_app/pages/sign_up.dart';
+
 import 'package:news_app/utils/cached_image.dart';
 import 'package:news_app/utils/empty.dart';
 import 'package:news_app/utils/sign_in_dialog.dart';
@@ -347,7 +346,7 @@ class _EngageState extends State<Engage> {
                                 ))
                             : openSignInDialog(context);
                       },
-                      icon: Icon(
+                      icon: const Icon(
                         Icons.edit,
                         color: Colors.red,
                       ),
@@ -364,7 +363,7 @@ class _EngageState extends State<Engage> {
                                 ))
                             : openSignInDialog(context);
                       },
-                      icon: Icon(
+                      icon: const Icon(
                         Icons.photo,
                         color: Colors.green,
                       ),

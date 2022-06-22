@@ -78,8 +78,9 @@ class SliverCard1 extends StatelessWidget {
                               borderRadius: BorderRadius.circular(10),
                             ),
                             child: CustomCacheImage(
-                                imageUrl:
-                                    "https://img.youtube.com/vi/${d.videoID}/0.jpg",
+                                imageUrl: d.imageurl == ''
+                                    ? "https://img.youtube.com/vi/${d.videoID}/0.jpg"
+                                    : d.imageurl,
                                 radius: 5.0),
                           ),
                           VideoIcon(

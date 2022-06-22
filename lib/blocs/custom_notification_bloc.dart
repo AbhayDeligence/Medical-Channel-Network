@@ -82,12 +82,6 @@ class CustomNotificationBloc extends ChangeNotifier {
     return null;
   }
 
-
-
-
-
-
-
   setLoading(bool isloading) {
     _isLoading = isloading;
     notifyListeners();

@@ -43,8 +43,9 @@ class Card3 extends StatelessWidget {
                               borderRadius: BorderRadius.circular(5.0),
                             ),
                             child: CustomCacheImage(
-                                imageUrl:
-                                    "https://img.youtube.com/vi/${d.videoID}/0.jpg",
+                                imageUrl: d.imageurl == ''
+                                    ? "https://img.youtube.com/vi/${d.videoID}/0.jpg"
+                                    : d.imageurl,
                                 radius: 5.0),
                           ),
                           VideoIcon(
@@ -65,8 +66,9 @@ class Card3 extends StatelessWidget {
                             child: Hero(
                               tag: heroTag!,
                               child: CustomCacheImage(
-                                  imageUrl:
-                                      "https://img.youtube.com/vi/${d.videoID}/0.jpg",
+                                  imageUrl: d.imageurl == ''
+                                      ? "https://img.youtube.com/vi/${d.videoID}/0.jpg"
+                                      : d.imageurl,
                                   radius: 5.0),
                             ),
                           ),
@@ -77,7 +79,7 @@ class Card3 extends StatelessWidget {
                         ],
                       ),
               ),
-              SizedBox(
+              const SizedBox(
                 width: 15,
               ),
               Flexible(
@@ -93,7 +95,7 @@ class Card3 extends StatelessWidget {
                       maxLines: 4,
                       overflow: TextOverflow.ellipsis,
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 10,
                     ),
                     Container(
@@ -110,7 +112,7 @@ class Card3 extends StatelessWidget {
                             color: Colors.white),
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 20,
                     ),
                     Row(
@@ -120,7 +122,7 @@ class Card3 extends StatelessWidget {
                           color: Theme.of(context).secondaryHeaderColor,
                           size: 20,
                         ),
-                        SizedBox(
+                        const SizedBox(
                           width: 2,
                         ),
                         Text(
@@ -129,7 +131,7 @@ class Card3 extends StatelessWidget {
                               color: Theme.of(context).secondaryHeaderColor,
                               fontSize: 13),
                         ),
-                        Spacer(),
+                        const Spacer(),
                         // Icon(
                         //   Icons.favorite,
                         //   color: Colors.grey,

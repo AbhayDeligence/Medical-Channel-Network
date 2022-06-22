@@ -17,7 +17,7 @@ class SearchBar extends StatelessWidget {
     return Container(
       padding: EdgeInsets.only(left: 15, right: 15, top: 15, bottom: 10),
       height: 65,
-      //color: Colors.green,
+      //color: Colors .green,
       width: MediaQuery.of(context).size.width,
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -34,7 +34,7 @@ class SearchBar extends StatelessWidget {
               nextScreen(context, ProfilePage());
             },
           ),
-          SizedBox(
+          const SizedBox(
             width: 10,
           ),
           Expanded(

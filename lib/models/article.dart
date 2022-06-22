@@ -11,6 +11,7 @@ class Article {
   int? loves;
   String? sourceUrl;
   String? date;
+  String? imageurl;
   String? timestamp;
   int? views;
   bool? isLecture;
@@ -24,6 +25,7 @@ class Article {
       this.videoID,
       this.loves,
       this.sourceUrl,
+      this.imageurl,
       this.date,
       this.timestamp,
       this.views,
@@ -35,6 +37,7 @@ class Article {
         category: d['category'],
         contentType: d['content type'],
         title: d['title'],
+        imageurl: d['image url'],
         description: d['description'],
         youtubeVideoUrl: d['youtube url'],
         videoID: d['content type'] == 'video'
